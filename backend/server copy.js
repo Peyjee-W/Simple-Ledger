@@ -19,14 +19,15 @@ console.log('Attempting to connect to MongoDB...');
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('MongoDB connected');
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
     })
     .catch(err => {
         console.error('MongoDB connection error:', err);
     });
 
-// 引入交易路由，并将路由前缀设为 `/api/transactions`
-const transactionsRouter = require('./routes/transactions');
-app.use('/api/transactions', transactionsRouter); 
-
-// 导出 Express 应用程序（Vercel 使用）
-module.exports = app;
+    const transactionsRouter = require('./routes/transactions');  // 引入交易路由
+    app.use('/transactions', transactionsRouter);                 // 将路由添加到应用程序中
+    
+// 导出 Express 应用程序（Vercel 使用）module.exports = app; 
