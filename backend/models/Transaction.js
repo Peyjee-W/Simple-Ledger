@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 
-// 定义 Transaction 模型的结构
 const transactionSchema = new mongoose.Schema({
-    amount: { type: Number, required: true },    // 金额
-    category: { type: String, required: true },  // 类别，如"食品"、"交通"
-    date: { type: Date, default: Date.now },     // 日期，默认是当前时间
-    note: { type: String }                       // 备注
+    amount: { type: Number, required: true },
+    category: { type: String, required: true },
+    date: { type: Date, default: Date.now },  // 添加日期字段，默认值为当前日期
+    note: { type: String }
 });
 
-// 创建并导出模型
 const Transaction = mongoose.model('Transaction', transactionSchema);
 module.exports = Transaction;

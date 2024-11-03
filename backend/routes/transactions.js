@@ -14,15 +14,19 @@ router.post('/add', async (req, res) => {
     }
 });
 
-// 获取所有交易记录
+// 获取指定日期的交易记录
 router.get('/', async (req, res) => {
+    const { date } = req.query;
     try {
-        const transactions = await Transaction.find();
+        const query = date ? { date: new Date(date) } : {};  // 如果有日期参数，按日期过滤
+        const transactions = await Transaction.find(query);
         res.json(transactions);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
+
+
 
 // 删除交易记录
 router.delete('/:id', async (req, res) => {
@@ -34,5 +38,22 @@ router.delete('/:id', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
+// 获取指定月份的交易记录
+router.get('/monthly', async (req, res) => {
+    const { year, month } = req.query;
+    const startDate = new Date(year, month - 1, 1); // 月份减1
+    const endDate = new Date(year, month, 1);
+
+    try {
+        const transactions = await Transaction.find({
+            date: { $gte: startDate, $lt: endDate }
+        });
+        res.json(transactions);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 
 module.exports = router;

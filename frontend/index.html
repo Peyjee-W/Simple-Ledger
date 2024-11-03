@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>超级萌萌记账本</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>超级萌萌记账本</h1>
+        </header>
+
+        <!-- 日期选择器 -->
+        <div class="date-picker-container">
+            <label for="datePicker">选择日期：</label>
+            <input type="date" id="datePicker" />
+        </div>
+
+        <!-- 添加交易记录表单 -->
+        <div class="form-container">
+            <h2>来，记一笔！💸</h2>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <input type="number" id="amount" placeholder="花了多少钱？" required />
+                </div>
+                <div class="form-group">
+                    <input type="text" id="category" list="categoryOptions" placeholder="选择或输入分类" required />
+                    <datalist id="categoryOptions">
+                        <option value="食品">🍜 食品</option>
+                        <option value="交通">🚗 交通</option>
+                        <option value="购物">🛍️ 购物</option>
+                        <option value="娱乐">🎉 娱乐</option>
+                        <option value="健康">💊 健康</option>
+                        <option value="学习">📚 学习</option>
+                        <option value="其他">🌈 其他</option>
+                    </datalist>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="note" placeholder="有啥备注要写吗？" />
+                </div>
+                <button type="submit" class="submit-button">记下！✍️</button>
+            </form>
+        </div>
+
+        <!-- 显示交易记录列表 -->
+        <div class="transaction-list-container">
+            <h2>账单明细📜</h2>
+            <div id="totalAmount" class="total-amount">总计金额：0 元</div>
+            <ul id="transactionList"></ul>
+        </div>
+        <div class="monthly-summary-container">
+            <h2>每月总结📅</h2>
+            <div id="monthlyTotal" class="total-amount">本月总支出：0 元</div>
+            
+            <h3>消费分析📊</h3>
+            <ul id="categorySummaryList"></ul>
+        </div>
+        
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
